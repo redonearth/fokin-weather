@@ -5,68 +5,71 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
 const weatherOptions = {
-  Haze: {
-    iconName: "weather-hail",
-    gradient: ["#B993D6", "#8CA6DB"]
-  },
   Thunderstorm: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-lightning",
+    gradient: ["#243B55", "#ffd89b"]
   },
   Drizzle: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-hail",
+    gradient: ["#0083B0", "#00B4DB"],
+    title: "Drizzle",
+    subtitle: "Is like rain, but gay 🌈"
   },
   Rain: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-rainy",
+    gradient: ["#182848", "#4b6cb7"]
   },
   Snow: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-snowy",
+    gradient: ["#2980B9", "#6DD5FA"]
   },
   Atmosphere: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-fog",
+    gradient: ["#83a4d4", "#b6fbff"]
   },
   Clear: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-sunny",
+    gradient: ["#5433FF", "#20BDFF", "#A5FECB"]
   },
   Clouds: {
-    iconName: "",
-    gradient: []
-  },
-  Haze: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-cloudy",
+    gradient: ["#525252", "#3d72b4"]
   },
   Mist: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-fog",
+    gradient: ["#abbaab", "#ffffff"]
   },
   Dust: {
-    iconName: "",
-    gradient: []
+    iconName: "weather-hail",
+    gradient: ["#8e9eab", "#eef2f3"]
+  },
+  Haze: {
+    iconName: "weather-hazy",
+    gradient: ["#B993D6", "#8CA6DB"]
   }
 };
 
 export default function Weather({ temp, condition }) {
   return (
     <LinearGradient
-      colors={weatherOptions[condition].gradient}
+      colors={weatherOptions["Drizzle"].gradient}
       style={styles.container}
     >
       <StatusBar barStyle="light-content" />
       <View style={styles.halfContainer}>
         <MaterialCommunityIcons
           size={96}
-          name={weatherOptions["Haze"].iconName || "weather-sunset"}
+          name={weatherOptions["Drizzle"].iconName || "weather-sunset"}
           color="white"
         />
         <Text style={styles.temp}>{temp}&deg;</Text>
       </View>
-      <View style={styles.halfContainer} />
+      <View style={{ ...styles.halfContainer, ...styles.textContainer }}>
+        <Text style={styles.title}>{weatherOptions["Drizzle"].title}</Text>
+        <Text style={styles.subtitle}>
+          {weatherOptions["Drizzle"].subtitle}
+        </Text>
+      </View>
     </LinearGradient>
   );
 }
@@ -81,9 +84,9 @@ Weather.propTypes = {
     "Atmosphere",
     "Clear",
     "Clouds",
-    "Haze",
     "Mist",
-    "Dust"
+    "Dust",
+    "Haze"
   ]).isRequired
 };
 
@@ -101,5 +104,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  title: {
+    color: "white",
+    fontSize: 44,
+    fontWeight: "300",
+    marginBottom: 10
+  },
+  subtitle: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "600"
+  },
+  textContainer: {
+    paddingHorizontal: 20,
+    alignItems: "flex-start"
   }
 });
